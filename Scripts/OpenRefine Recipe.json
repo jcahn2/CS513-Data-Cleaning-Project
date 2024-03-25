@@ -1,0 +1,4702 @@
+[
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Violations",
+    "expression": "grel:replace(substring(value,0,2),\".\",\"\")",
+    "onError": "set-to-blank",
+    "newColumnName": "violation code",
+    "columnInsertIndex": 14,
+    "description": "Create column violation code at index 14 based on column Violations using expression grel:replace(substring(value,0,2),\".\",\"\")"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "DBA Name",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\")",
+    "onError": "set-to-blank",
+    "newColumnName": "DBA Name - Clean",
+    "columnInsertIndex": 2,
+    "description": "Create column DBA Name - Clean at index 2 based on column DBA Name using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\")"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "DBA Name - Clean",
+    "description": "Remove column DBA Name - Clean"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "DBA Name - Clean",
+          "expression": "value",
+          "columnName": "DBA Name - Clean",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": "11 DINING, LLC",
+                "l": "11 DINING, LLC"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "baseColumnName": "DBA Name",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \n \",\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "DBA Name - Clean",
+    "columnInsertIndex": 2,
+    "description": "Create column DBA Name - Clean at index 2 based on column DBA Name using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \n \",\" \")"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "AKA Name",
+    "expression": "grel:if(value==null,cells['DBA Name - Clean'].value,value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \"))",
+    "onError": "set-to-blank",
+    "newColumnName": "AKA Name - Clean",
+    "columnInsertIndex": 4,
+    "description": "Create column AKA Name - Clean at index 4 based on column AKA Name using expression grel:if(value==null,cells['DBA Name - Clean'].value,value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \"))"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "License #",
+          "expression": "value",
+          "columnName": "License #",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": "0",
+                "l": "0"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "baseColumnName": "License #",
+    "expression": "grel:if(value==null,'Incorrect',if(value=='0','Incorrect',if(value.contains(\"[a-zA-Z~!@#$%^&*()_+\\][{}|';:/.,<>?]+\") == false,'Incorrect','Correct')))",
+    "onError": "set-to-blank",
+    "newColumnName": "License - Flag",
+    "columnInsertIndex": 6,
+    "description": "Create column License - Flag at index 6 based on column License # using expression grel:if(value==null,'Incorrect',if(value=='0','Incorrect',if(value.contains(\"[a-zA-Z~!@#$%^&*()_+\\][{}|';:/.,<>?]+\") == false,'Incorrect','Correct')))"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "License - Flag",
+    "description": "Remove column License - Flag"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "License #",
+    "expression": "grel:if(value==null,'Incorrect',if(value=='0','Incorrect',if(value.contains(\"[a-zA-Z~!@#$%^&*()_+\\][{}|';:/.,<>?]+\") == true,'Incorrect','Correct')))",
+    "onError": "set-to-blank",
+    "newColumnName": "License # - Flag",
+    "columnInsertIndex": 6,
+    "description": "Create column License # - Flag at index 6 based on column License # using expression grel:if(value==null,'Incorrect',if(value=='0','Incorrect',if(value.contains(\"[a-zA-Z~!@#$%^&*()_+\\][{}|';:/.,<>?]+\") == true,'Incorrect','Correct')))"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "License #",
+    "expression": "grel:value.trim().replace(\" \",\" \").toNumber()",
+    "onError": "set-to-blank",
+    "newColumnName": "License # - Clean",
+    "columnInsertIndex": 6,
+    "description": "Create column License # - Clean at index 6 based on column License # using expression grel:value.trim().replace(\" \",\" \").toNumber()"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Risk",
+    "expression": "grel:if(value==null,'Incorrect',if(value=='','Incorrect',if(value=='Risk 1 (High)','Correct',if(value=='Risk 2 (Medium)','Correct',if(value=='Risk 3 (Low)','Correct','Incorrect')))))",
+    "onError": "set-to-blank",
+    "newColumnName": "Risk - Flag",
+    "columnInsertIndex": 10,
+    "description": "Create column Risk - Flag at index 10 based on column Risk using expression grel:if(value==null,'Incorrect',if(value=='','Incorrect',if(value=='Risk 1 (High)','Correct',if(value=='Risk 2 (Medium)','Correct',if(value=='Risk 3 (Low)','Correct','Incorrect')))))"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Risk",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "Risk Category - Clean",
+    "columnInsertIndex": 10,
+    "description": "Create column Risk Category - Clean at index 10 based on column Risk using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Inspection Type",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "Inspection Type - Clean",
+    "columnInsertIndex": 18,
+    "description": "Create column Inspection Type - Clean at index 18 based on column Inspection Type using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVAS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS RE INSPECTION OF CLOSE UP"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS RE-INSPECTION OF CLOSE UP"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "KIDS CAFE",
+          "KIDS CAFE'"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "KIDS CAFE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS/SPECIAL EVENT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS - SPECIAL EVENT"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS SPECIAL EVENTS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS - SPECIAL EVENTS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "FIRE/COMPLAIN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FIRE COMPLAINT"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE-TASK FORCE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - TASK FORCE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE WRONG ADDRESS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - WRONG ADDRESS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE TASK FORCE / NOT -FOR-PROFIT CLUB"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - TASK FORCE / NOT-FOR-PROFIT CLUB"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE TASK FORCE / NOT -FOR-PROFIT CLU"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - TASK FORCE / NOT-FOR-PROFIT CLUB"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE TASK 1474"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - TASK 1474"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE/NOT READY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - NOT READY"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE REQUEST"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - REQUEST"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE RENEWAL FOR DAYCARE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - RENEWAL FOR DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE DAYCARE 1586"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - DAYCARE 1586"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE CONSULTATION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - CONSULTATION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE RE-INSPECTION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - RE-INSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE CANCELED BY OWNER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - CANCELED BY OWNER"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE RENEWAL INSPECTION FOR DAYCARE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE - RENEWAL FOR DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - CANCELED BY OWNER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE CANCELED BY OWNER"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - CONSULTATION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE CONSULTATION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - DAYCARE 1586"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - NOT READY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE NOT READY"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - RE-INSPECTION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE RE-INSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - RENEWAL FOR DAYCARE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE RENEWAL FOR DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - REQUEST"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE REQUEST"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - TASK 1474"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE TASK"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - TASK FORCE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE TASK FORCE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - TASK FORCE / NOT-FOR-PROFIT CLUB"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE TASK FORCE / NOT-FOR-PROFIT CLUB"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE - WRONG ADDRESS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE WRONG ADDRESS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAY CARE LICENSE RENEWAL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE RENEWAL DAY CARE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LICENSE RENEWAL DAY CARE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE RENEWAL FOR DAY CARE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "COMPLAINT-FIRE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COMPLAINT FIRE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "COMPLAINT-FIRE RE-INSPECTION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COMPLAINT FIRE RE-INSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS - SPECIAL EVENT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS - SPECIAL EVENTS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS - SPECIAL EVENTS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS - SPECIAL EVENT"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1315 LICENSE REINSPECTION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LICENSE RE-INSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS - SPECIAL EVENT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS SPECIAL EVENT"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "NO ENTRY-SHORT COMPLAINT)"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "NO ENTRY (SHORT COMPLAINT)"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "O.B."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "OUT OF BUSINESS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "OUT OFBUSINESS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "OUT OF BUSINESS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "OWNER SUSPENDED OPERATION/LICENSE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "OWNER SUSPENDED OPERATION / LICENSE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "REINSPECTION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "RE-INSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CANVASS RE-INSPECTION OF CLOSE UP"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CANVASS RE-INSPECTION OF CLOSE-UP"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "RE-INSPECTION OF CLOSE-UP"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CLOSE-UP/COMPLAINT REINSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE FOR LIQUOR 1474"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE LIQUOR (1481)"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE LIQUOR 1470"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE LIQUOR 1474"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE LIQUOR 1475"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE LIQUOR INSPECTION 1474"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR INSPECTION"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE PACKAGE GOODS 1474"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE PACKAGE GOODS"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASK FORCE(1470) LIQUOR TAVERN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE LIQUOR TAVERN"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TASKFORCE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TASK FORCE"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TAVERN 1470"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TAVERN"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [],
+        "fromBlank": true,
+        "fromError": false,
+        "to": "UNKNOWN"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "TWO PEOPLE ATE AND GOT SICK."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SUSPECTED FOOD POISONING"
+      }
+    ],
+    "description": "Mass edit cells in column Inspection Type - Clean"
+  },
+  {
+    "op": "core/column-split",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Inspection Date",
+    "guessCellType": true,
+    "removeOriginalColumn": false,
+    "mode": "separator",
+    "separator": "/",
+    "regex": false,
+    "maxColumns": 3,
+    "description": "Split column Inspection Date by separator"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "Inspection Date 1",
+    "newColumnName": "Inspection Month",
+    "description": "Rename column Inspection Date 1 to Inspection Month"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "Inspection Date 2",
+    "newColumnName": "Inspection Day",
+    "description": "Rename column Inspection Date 2 to Inspection Day"
+  },
+  {
+    "op": "core/column-rename",
+    "oldColumnName": "Inspection Date 3",
+    "newColumnName": "Inspection Year",
+    "description": "Rename column Inspection Date 3 to Inspection Year"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "Grocery & Restaurant",
+          "GROCERY& RESTAURANT",
+          "grocery & restaurant",
+          "GROCERY/ RESTAURANT",
+          "GROCERY & RESTAURANT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Grocery & Restaurant"
+      },
+      {
+        "from": [
+          "CONVENIENCE STORE",
+          "convenience store",
+          "(convenience store)",
+          "Convenience Store"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Convenience Store"
+      },
+      {
+        "from": [
+          "coffee shop",
+          "COFFEE SHOP",
+          "Coffee shop",
+          "COFFEE  SHOP"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Coffee Shop"
+      },
+      {
+        "from": [
+          "GAS STATION",
+          "gas station",
+          "(gas station)",
+          "Gas station"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Gas Station"
+      },
+      {
+        "from": [
+          "CAFETERIA",
+          "Cafeteria",
+          "cafeteria"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Cafeteria"
+      },
+      {
+        "from": [
+          "dollar store",
+          "DOLLAR STORE",
+          "Dollar store"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Dollar Store"
+      },
+      {
+        "from": [
+          "BANQUET HALL",
+          "Banquet Hall",
+          "banquet hall"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Banquet Hall"
+      },
+      {
+        "from": [
+          "TAVERN",
+          "tavern",
+          "Tavern"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Tavern"
+      },
+      {
+        "from": [
+          "NIGHT CLUB",
+          "night club"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Night Club"
+      },
+      {
+        "from": [
+          "FOOD PANTRY",
+          "Food Pantry"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Food Pantry"
+      },
+      {
+        "from": [
+          "BAR",
+          "bar"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Bar"
+      },
+      {
+        "from": [
+          "AFTER SCHOOL PROGRAM",
+          "after school program"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "After School Program"
+      },
+      {
+        "from": [
+          "SOCIAL CLUB",
+          "Social Club"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Social Club"
+      },
+      {
+        "from": [
+          "cooking school",
+          "COOKING SCHOOL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Cooking School"
+      },
+      {
+        "from": [
+          "Long Term Care",
+          "LONG TERM CARE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Long Term Care Facility"
+      },
+      {
+        "from": [
+          "CHURCH KITCHEN",
+          "Church Kitchen"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Church Kitchen"
+      },
+      {
+        "from": [
+          "GROCERY",
+          "grocery"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Grocery"
+      },
+      {
+        "from": [
+          "ASSISTED LIVING",
+          "Assisted Living"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Assisted Living"
+      },
+      {
+        "from": [
+          "FITNESS CENTER",
+          "fitness center"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Fitness Center"
+      },
+      {
+        "from": [
+          "unlicensed facility",
+          "UNLICENSED FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Unlicensed Facility"
+      },
+      {
+        "from": [
+          "PRIVATE SCHOOL",
+          "Private School"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Private School"
+      },
+      {
+        "from": [
+          "MOBILE FROZEN DESSERT VENDOR",
+          "Mobile frozen dessert vendor"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Mobile Frozen Desserts Vendor"
+      },
+      {
+        "from": [
+          "Restaurant",
+          "restaurant"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Restaurant"
+      },
+      {
+        "from": [
+          "Long Term Care Facility",
+          "LONG TERM CARE FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Long Term Care Facility"
+      },
+      {
+        "from": [
+          "BANQUET",
+          "Banquet"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Banquet Hall"
+      },
+      {
+        "from": [
+          "weight loss program",
+          "WEIGHT LOSS PROGRAM"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Weight Loss Program"
+      },
+      {
+        "from": [
+          "Children's Services Facility",
+          "CHILDRENS SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Children's Services Facility"
+      },
+      {
+        "from": [
+          "CONVENIENCE",
+          "convenience"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Convenience"
+      },
+      {
+        "from": [
+          "WAREHOUSE",
+          "warehouse"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Warehouse"
+      },
+      {
+        "from": [
+          "TAVERN-LIQUOR",
+          "TAVERN/LIQUOR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Tavern - Liquor"
+      },
+      {
+        "from": [
+          "School",
+          "SCHOOL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "School"
+      },
+      {
+        "from": [
+          "Ice cream",
+          "ICE CREAM"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Ice Cream"
+      },
+      {
+        "from": [
+          "CANDY/GELATO",
+          "candy/gelato"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Candy / Gelato"
+      },
+      {
+        "from": [
+          "CHURCH",
+          "Church"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Church"
+      },
+      {
+        "from": [
+          "Mobile Frozen Desserts Vendor",
+          "MOBILE FROZEN DESSERTS VENDOR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Mobile Frozen Desserts Vendor"
+      },
+      {
+        "from": [
+          "LIVE POULTRY",
+          "Live Poultry"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Live Poultry"
+      },
+      {
+        "from": [
+          "GROCERY STORE / GAS STATION",
+          "GAS STATION/ GROCERY STORE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Grocery Store / Gas Station"
+      },
+      {
+        "from": [
+          "THEATER",
+          "theater"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Theater"
+      },
+      {
+        "from": [
+          "tavern/restaurant",
+          "TAVERN/RESTAURANT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Tavern - Restaurant"
+      },
+      {
+        "from": [
+          "KIDS CAFE",
+          "Kids Cafe'"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Kids Cafe"
+      },
+      {
+        "from": [
+          "newsstand",
+          "NEWSSTAND"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Newsstand"
+      },
+      {
+        "from": [
+          "bakery/restaurant",
+          "BAKERY/RESTAURANT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Bakery - Restaurant"
+      },
+      {
+        "from": [
+          "COMMISSARY",
+          "Commissary"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Commissary"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "Bakery - Restaurant",
+          "BAKERY/ RESTAURANT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Bakery - Restaurant"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Facility Type",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "Facility Type - Clean",
+    "columnInsertIndex": 9,
+    "description": "Create column Facility Type - Clean at index 9 based on column Facility Type using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1005 NURSING HOME"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "NURSING HOME"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICE FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICE S FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDREN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023-CHILDREN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1005 NURSING HOME"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "NURSING HOME"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICE FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICE S FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDREN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023-CHILDREN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "Facility Type - Clean",
+    "description": "Remove column Facility Type - Clean"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Facility Type",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "Facility Type - Clean",
+    "columnInsertIndex": 9,
+    "description": "Create column Facility Type - Clean at index 9 based on column Facility Type using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1005 NURSING HOME"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "NURSING HOME"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICE FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICE S FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDERN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023 CHILDREN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023-CHILDREN'S SERVICES FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDERN'S SERVICE FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1584-DAY CARE ABOVE 2 YEARS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAY CARE ABOVE 2 YEARS"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "A-NOT-FOR-PROFIT CHEF TRAINING PROGRAM"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "A NOT-FOR-PROFIT CHEF TRAINING PROGRAM"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "A NOT-FOR-PROFIT CHEF TRAINING PROGRAM"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "A NOT-FOR-PROFIT CHEF TRAINING PROGRAM"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "ASSISSTED LIVING"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ASSISTED LIVING"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BAKERY/DELI"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BAKERY - DELI"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BAKERY/GROCERY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BAKERY - GROCERY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BANQUET ROOMS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BANQUET ROOM"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BANQUET/KITCHEN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BANQUET KITCHEN"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BANQUETS/ROOM SERVICE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BANQUETS ROOM SERVICE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BANQUETS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BANQUET HALL"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BAR/GRILL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BAR/GRILL"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BEVERAGE/SILVERWARE WAREHOUSE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BEVERAGE / SILVERWARE WAREHOUSE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "BOWLING LANES/BANQUETS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BANQUET BOWLING LANES"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CAT/LIQUOR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CATERING - LIQUOR"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CATERING/CAFE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CATERING - CAFE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHARTER SCHOOL/CAFETERIA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHARTER SCHOOL CAFETERIA"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHILDERN'S SERVICES  FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDREN'S SERVICES FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHILDERN'S SERVICE FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDREN'S SERVICES FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHILDERN ACTIVITY FACILITY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHILDREN'S SERVICES FACILITY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHURCH/AFTER SCHOOL PROGRAM"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHURCH AFTER SCHOOL PROGRAM"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHURCH/DAY CARE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHURCH / DAY CARE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHURCH/SPECIAL EVENT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHURCH / SPECIAL EVENT"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHURCH/SPECIAL EVENTS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHURCH / SPECIAL EVENT"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "COFFEE/TEA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COFFEE / TEA"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "COMMIASARY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COMMISSARY"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CONVENIENCE/DRUG STORE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CONVENIENCE / DRUG STORE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CONVENIENCE/GAS STATION"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CONVENIENCE / GAS STATION"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CONVENIENT STORE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CONVENIENCE STORE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CONVNIENCE STORE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CONVENIENCE STORE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CULINARY ARTS SCHOOL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CULINARY SCHOOL"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAY CARE 1023"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAY CARE 2-14"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE 2-14 YEARS"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAY CARE ABOVE 2 YEARS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE ABOVE 2 YEARS"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAY CARE COMBO (1586)"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE COMBO"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE 1023"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE (2 - 6 YEARS)"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (2-6 YEARS)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE 1586"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE 2 YRS TO 12 YRS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (2-12) YEARS"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE 2-14 YEARS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (2-14) YEARS"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE COMBO 1586"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE COMBO"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE ABOVE AND UNDER 2 YEARS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (ABOVE AND UNDER 2 YEARS)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE 2-6, UNDER 6"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (2-6 YEARS, UNDER 6 YEARS)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE 6 WKS-5YRS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (6 WEEKS - 5 YEARS)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DAYCARE ABOVE 2 YEARS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DAYCARE (ABOVE 2 YEARS)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "DOLLAR STORE SELLING GROCERY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DOLLAR & GROCERY STORE"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "FROZEN DESSERTS DISPENSER -NON MOTORIZED"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FROZEN DESSERTS DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "FROZEN DESSERTS DISPENSER-NON-MOTORIZED"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FROZEN DESSERTS DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILE DESSERT VENDOR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE DESSERTS VENDOR"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILE FROZEN DESSERT DISPENSER_NON  MOTORIZED."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE FROZEN DESSERT DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILE FROZEN DESSERTS DISPENSER-NON- MOTORIZED"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE FROZEN DESSERT DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILE FROZEN DESSERTS DISPENSER-NON-MOTOR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE FROZEN DESSERT DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILE FROZEN DESSERT DISPENSER NON-MOTORIZED"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE FROZEN DESSERTS DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILE FROZEN DESSERTS DISPENSER-NON-MOTORIZED"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE FROZEN DESSERTS DISPENSER NON-MOTORIZED"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOVIE THEATRE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOVIE THEATER"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MOBILPREPARED FOOD VENDOR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MOBILE PREPARED FOOD VENDOR"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "NON -PROFIT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "NON-PROFIT"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "ROOF TOP"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ROOF TOPS"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "ROOF TOPS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ROOFTOP"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "ROOFTOPS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ROOFTOP"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "SHARED KITCHEN USER (LONG TREM)"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SHARED KITCHEN USER (LONG TEEM)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "SHARED KITCHEN USER (LONG TEEM)"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SHARED KITCHEN USER (LONG TERM)"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "THEATRE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "THEATER"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "WRIGLEY ROOF TOP"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "WRIGLEY ROOFTOP"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [],
+        "fromBlank": true,
+        "fromError": false,
+        "to": "UNKNOWN"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Facility Type - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1023"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "UNKNOWN"
+      }
+    ],
+    "description": "Mass edit cells in column Facility Type - Clean"
+  },
+  {
+    "op": "core/column-split",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations",
+    "guessCellType": true,
+    "removeOriginalColumn": false,
+    "mode": "separator",
+    "separator": "|",
+    "regex": false,
+    "maxColumns": 0,
+    "description": "Split column Violations by separator"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 1",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 1 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 1",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 1 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 1",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 1 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 2",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 2 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 2",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 2 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 23",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 23 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 23",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 23 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 23",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 23 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 22",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 22 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 22",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 22 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 21",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 21 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 22",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 22 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 21",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 21 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 21",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 21 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 20",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 20 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 20",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 20 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 20",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 20 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 19",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 19 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 19",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 19 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 19",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 19 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 18",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 18 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 18",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 18 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 18",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 18 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 17",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 17 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 17",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 17 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 17",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 17 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 16",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 16 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 16",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 16 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 16",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 16 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 15",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 15 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 15",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 15 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 15",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 15 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 13",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 13 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 13",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 13 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 13",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 13 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 14",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 14 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 14",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 14 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 14",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 14 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 12",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 12 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 12",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 12 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 12",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 12 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 11",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 11 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 11",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 11 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 11",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 11 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 10",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 10 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 10",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 10 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 10",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 10 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 9",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 9 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 9",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 9 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 9",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 9 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 8",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 8 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 8",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 8 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 8",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 8 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 7",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 7 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 7",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 7 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 7",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 7 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 6",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 6 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 6",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 6 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 6",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 6 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 5",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 5 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 5",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 5 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 5",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 5 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 4",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 4 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 4",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 4 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 4",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 4 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 3",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 3 using expression value.trim()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 3",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 3 using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Violations 3",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Violations 3 using expression value.toUppercase()"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Address",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "Address - Clean",
+    "columnInsertIndex": 7,
+    "description": "Create column Address - Clean at index 7 based on column Address using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Address - Clean",
+    "expression": "value.replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Address - Clean using expression value.replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Address - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "1410 S MUSEUM CAMPUS DR",
+          "1410 S MUSEUM CAMPUS DR."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "1410 S MUSEUM CAMPUS DR"
+      },
+      {
+        "from": [
+          "2646 N MILWAUKEE AVE AVE",
+          "2646 N MILWAUKEE AVE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "2646 N MILWAUKEE AVE"
+      },
+      {
+        "from": [
+          "5500 N ST LOUIS AVE",
+          "5500 N ST. LOUIS AVE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "5500 N ST LOUIS AVE"
+      },
+      {
+        "from": [
+          "750 N FRANKLIN ST",
+          "750 N FRANKLIN ST."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "750 N FRANKLIN ST"
+      },
+      {
+        "from": [
+          "2301 S INDIANA AVE",
+          "2301 S INDIANA AVE."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "2301 S INDIANA AVE"
+      },
+      {
+        "from": [
+          "124 E 35TH ST",
+          "124 E 35TH ST."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "124 E 35TH ST"
+      },
+      {
+        "from": [
+          "6319 S DR MARTIN LUTHER KING JR DR",
+          "6319 S DR. MARTIN LUTHER KING JR DR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "6319 S DR MARTIN LUTHER KING JR DR"
+      },
+      {
+        "from": [
+          "3920 N CLARK ST",
+          "3920 N CLARK ST."
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "3920 N CLARK ST"
+      },
+      {
+        "from": [
+          "3323 W NORTH AVE .",
+          "3323 W NORTH AVE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "3323 W NORTH AVE"
+      },
+      {
+        "from": [
+          "4628 N N CUMBERLAND AVE",
+          "4628 N CUMBERLAND AVE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "4628 N CUMBERLAND AVE"
+      },
+      {
+        "from": [
+          "3901 S DR MARTIN LUTHER KING JR DR",
+          "3901 S DR MARTIN LUTHER KING JR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "3901 S DR MARTIN LUTHER KING JR DR"
+      }
+    ],
+    "description": "Mass edit cells in column Address - Clean"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Address - Clean",
+    "expression": "grel:if(isBlank(value),'Missing','Exists')",
+    "onError": "set-to-blank",
+    "newColumnName": "Address - Flag",
+    "columnInsertIndex": 8,
+    "description": "Create column Address - Flag at index 8 based on column Address - Clean using expression grel:if(isBlank(value),'Missing','Exists')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "City",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,\" \")",
+    "onError": "set-to-blank",
+    "newColumnName": "City - Clean",
+    "columnInsertIndex": 10,
+    "description": "Create column City - Clean at index 10 based on column City using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,\" \")"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "City - Clean",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CHICAGO",
+          "CCHICAGO",
+          "CHCHICAGO",
+          "CHCICAGO",
+          "CHICAGOI",
+          "312CHICAGO"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHICAGO"
+      },
+      {
+        "from": [
+          "OLYMPIA FIELDS",
+          "OOLYMPIA FIELDS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "OLYMPIA FIELDS"
+      }
+    ],
+    "description": "Mass edit cells in column City - Clean"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "City - Clean",
+    "expression": "grel:if(isBlank(value),'Missing','Exists')",
+    "onError": "set-to-blank",
+    "newColumnName": "City - Flag",
+    "columnInsertIndex": 11,
+    "description": "Create column City - Flag at index 11 based on column City - Clean using expression grel:if(isBlank(value),'Missing','Exists')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "State",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,\" \")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column State using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,\" \")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "State",
+    "expression": "grel:if(isBlank(value),'IL','IL')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column State using expression grel:if(isBlank(value),'IL','IL')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Latitude",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Latitude using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Longitude",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Longitude using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Location",
+    "expression": "grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Location using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Latitude",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Latitude using expression value.toNumber()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Longitude",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Longitude using expression value.toNumber()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Location",
+    "expression": "grel:value.replace(/\\(|\\)/,'')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Location using expression grel:value.replace(/\\(|\\)/,'')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Location",
+    "expression": "grel:if(isBlank(value),'Missing','Exists')",
+    "onError": "set-to-blank",
+    "newColumnName": "Location - Flag",
+    "columnInsertIndex": 21,
+    "description": "Create column Location - Flag at index 21 based on column Location using expression grel:if(isBlank(value),'Missing','Exists')"
+  }
+]

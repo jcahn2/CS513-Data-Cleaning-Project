@@ -1,0 +1,264 @@
+
+% FACT: program(program_id, program_name, qualified_program_name, begin_annotation_id, end_annotation_id).
+program(1, 'Data_Cleaning_Workflow', 'Data_Cleaning_Workflow', 1, 58).
+program(2, 'CleanWithOpenRefine', 'Data_Cleaning_Workflow.CleanWithOpenRefine', 5, 12).
+program(3, 'SeparateTables', 'Data_Cleaning_Workflow.SeparateTables', 13, 25).
+program(4, 'FunctionalDependencyChecks', 'Data_Cleaning_Workflow.FunctionalDependencyChecks', 26, 30).
+program(5, 'SQLiteQualityAssessment', 'Data_Cleaning_Workflow.SQLiteQualityAssessment', 31, 49).
+
+% FACT: workflow(program_id).
+workflow(1).
+
+% FACT: function(program_id).
+
+% FACT: has_subprogram(program_id, subprogram_id).
+has_subprogram(1, 2).
+has_subprogram(1, 3).
+has_subprogram(1, 4).
+has_subprogram(1, 5).
+
+% FACT: port(port_id, port_type, port_name, qualified_port_name, port_annotation_id, data_id).
+port(1, 'in', 'Food_inspection.csv', 'Data_Cleaning_Workflow<-Food_inspection.csv', 3, 1).
+port(19, 'out', 'business_clean.csv', 'Data_Cleaning_Workflow->business_clean.csv', 50, 13).
+port(20, 'out', 'inspections_clean.csv', 'Data_Cleaning_Workflow->inspections_clean.csv', 52, 14).
+port(21, 'out', 'locations_clean.csv', 'Data_Cleaning_Workflow->locations_clean.csv', 54, 15).
+port(22, 'out', 'violations_clean.csv', 'Data_Cleaning_Workflow->violations_clean.csv', 56, 16).
+port(2, 'in', 'Food_inspection.csv', 'Data_Cleaning_Workflow.CleanWithOpenRefine<-Food_inspection.csv', 7, 2).
+port(3, 'param', 'OpenrefineCleaningOperationsSequence', 'Data_Cleaning_Workflow.CleanWithOpenRefine<-OpenrefineCleaningOperationsSequence', 9, 3).
+port(4, 'out', 'Food-Inspections-07182023.csv', 'Data_Cleaning_Workflow.CleanWithOpenRefine->Food-Inspections-07182023.csv', 10, 4).
+port(5, 'in', 'Food-Inspections-07182023.csv', 'Data_Cleaning_Workflow.SeparateTables<-Food-Inspections-07182023.csv', 15, 4).
+port(6, 'out', 'business.csv', 'Data_Cleaning_Workflow.SeparateTables->business.csv', 17, 5).
+port(7, 'out', 'inspections.csv', 'Data_Cleaning_Workflow.SeparateTables->inspections.csv', 19, 6).
+port(8, 'out', 'locations.csv', 'Data_Cleaning_Workflow.SeparateTables->locations.csv', 21, 7).
+port(9, 'out', 'violations.csv', 'Data_Cleaning_Workflow.SeparateTables->violations.csv', 23, 8).
+port(10, 'in', 'Food-Inspections-07182023.csv', 'Data_Cleaning_Workflow.FunctionalDependencyChecks<-Food-Inspections-07182023.csv', 28, 4).
+port(11, 'in', 'business.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment<-business.csv', 33, 5).
+port(12, 'in', 'inspections.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment<-inspections.csv', 35, 6).
+port(13, 'in', 'locations.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment<-locations.csv', 37, 7).
+port(14, 'in', 'violations.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment<-violations.csv', 39, 8).
+port(15, 'out', 'business_clean.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment->business_clean.csv', 41, 9).
+port(16, 'out', 'inspections_clean.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment->inspections_clean.csv', 43, 10).
+port(17, 'out', 'locations_clean.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment->locations_clean.csv', 45, 11).
+port(18, 'out', 'violations_clean.csv', 'Data_Cleaning_Workflow.SQLiteQualityAssessment->violations_clean.csv', 47, 12).
+
+% FACT: port_alias(port_id, alias).
+
+% FACT: port_uri_template(port_id, uri).
+port_uri_template(1, 'file://data/Food_inspection.csv').
+port_uri_template(19, 'file://data/business_clean.csv').
+port_uri_template(20, 'file://data/inspections_clean.csv').
+port_uri_template(21, 'file://data/locations_clean.csv').
+port_uri_template(22, 'file://data/violations_clean.csv').
+port_uri_template(2, 'file://data/Food_inspection.csv').
+port_uri_template(4, 'file://data/Food-Inspections-07182023.csv').
+port_uri_template(5, 'file://data/Food-Inspections-07182023.csv').
+port_uri_template(6, 'file://data/business.csv').
+port_uri_template(7, 'file://data/inspections.csv').
+port_uri_template(8, 'file://data/locations.csv').
+port_uri_template(9, 'file://data/violations.csv').
+port_uri_template(10, 'file://data/Food-Inspections-07182023.csv').
+port_uri_template(11, 'file://data/business.csv').
+port_uri_template(12, 'file://data/inspections.csv').
+port_uri_template(13, 'file://data/locations.csv').
+port_uri_template(14, 'file://data/violations.csv').
+port_uri_template(15, 'file://data/business_clean.csv').
+port_uri_template(16, 'file://data/inspections_clean.csv').
+port_uri_template(17, 'file://data/locations_clean.csv').
+port_uri_template(18, 'file://data/violations_clean.csv').
+
+% FACT: has_in_port(block_id, port_id).
+has_in_port(1, 1).
+has_in_port(2, 2).
+has_in_port(2, 3).
+has_in_port(3, 5).
+has_in_port(4, 10).
+has_in_port(5, 11).
+has_in_port(5, 12).
+has_in_port(5, 13).
+has_in_port(5, 14).
+
+% FACT: has_out_port(block_id, port_id).
+has_out_port(1, 19).
+has_out_port(1, 20).
+has_out_port(1, 21).
+has_out_port(1, 22).
+has_out_port(2, 4).
+has_out_port(3, 6).
+has_out_port(3, 7).
+has_out_port(3, 8).
+has_out_port(3, 9).
+has_out_port(5, 15).
+has_out_port(5, 16).
+has_out_port(5, 17).
+has_out_port(5, 18).
+
+% FACT: data(data_id, data_name, qualified_data_name).
+data(1, 'Food_inspection.csv', '[Food_inspection.csv]').
+data(13, 'business_clean.csv', '[business_clean.csv]').
+data(14, 'inspections_clean.csv', '[inspections_clean.csv]').
+data(15, 'locations_clean.csv', '[locations_clean.csv]').
+data(16, 'violations_clean.csv', '[violations_clean.csv]').
+data(2, 'Food_inspection.csv', 'Data_Cleaning_Workflow[Food_inspection.csv]').
+data(3, 'OpenrefineCleaningOperationsSequence', 'Data_Cleaning_Workflow[OpenrefineCleaningOperationsSequence]').
+data(4, 'Food-Inspections-07182023.csv', 'Data_Cleaning_Workflow[Food-Inspections-07182023.csv]').
+data(5, 'business.csv', 'Data_Cleaning_Workflow[business.csv]').
+data(6, 'inspections.csv', 'Data_Cleaning_Workflow[inspections.csv]').
+data(7, 'locations.csv', 'Data_Cleaning_Workflow[locations.csv]').
+data(8, 'violations.csv', 'Data_Cleaning_Workflow[violations.csv]').
+data(9, 'business_clean.csv', 'Data_Cleaning_Workflow[business_clean.csv]').
+data(10, 'inspections_clean.csv', 'Data_Cleaning_Workflow[inspections_clean.csv]').
+data(11, 'locations_clean.csv', 'Data_Cleaning_Workflow[locations_clean.csv]').
+data(12, 'violations_clean.csv', 'Data_Cleaning_Workflow[violations_clean.csv]').
+
+% FACT: channel(channel_id, data_id).
+channel(1, 2).
+channel(2, 4).
+channel(3, 4).
+channel(4, 5).
+channel(5, 6).
+channel(6, 7).
+channel(7, 8).
+channel(8, 13).
+channel(9, 14).
+channel(10, 15).
+channel(11, 16).
+channel(12, 1).
+channel(13, 9).
+channel(14, 10).
+channel(15, 11).
+channel(16, 12).
+
+% FACT: port_connects_to_channel(port_id, channel_id).
+port_connects_to_channel(2, 1).
+port_connects_to_channel(4, 2).
+port_connects_to_channel(5, 2).
+port_connects_to_channel(4, 3).
+port_connects_to_channel(10, 3).
+port_connects_to_channel(6, 4).
+port_connects_to_channel(11, 4).
+port_connects_to_channel(7, 5).
+port_connects_to_channel(12, 5).
+port_connects_to_channel(8, 6).
+port_connects_to_channel(13, 6).
+port_connects_to_channel(9, 7).
+port_connects_to_channel(14, 7).
+port_connects_to_channel(15, 8).
+port_connects_to_channel(16, 9).
+port_connects_to_channel(17, 10).
+port_connects_to_channel(18, 11).
+port_connects_to_channel(2, 12).
+port_connects_to_channel(15, 13).
+port_connects_to_channel(16, 14).
+port_connects_to_channel(17, 15).
+port_connects_to_channel(18, 16).
+
+% FACT: inflow_connects_to_channel(port_id, channel_id).
+inflow_connects_to_channel(1, 1).
+inflow_connects_to_channel(1, 12).
+
+% FACT: outflow_connects_to_channel(port_id, channel_id).
+outflow_connects_to_channel(19, 8).
+outflow_connects_to_channel(20, 9).
+outflow_connects_to_channel(21, 10).
+outflow_connects_to_channel(22, 11).
+outflow_connects_to_channel(19, 13).
+outflow_connects_to_channel(20, 14).
+outflow_connects_to_channel(21, 15).
+outflow_connects_to_channel(22, 16).
+
+% FACT: uri_variable(uri_variable_id, variable_name, port_id).
+
+% FACT: log_template(log_template_id, port_id, entry_template, log_annotation_id).
+
+% FACT: log_template_variable(log_variable_id, variable_name, log_template_id).
+
+% FACT: extract_source(source_id, source_path).
+extract_source(1, '').
+
+% FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
+annotation(1, 1, 2, 'begin', '@begin', 'Data_Cleaning_Workflow').
+annotation(2, 1, 2, 'desc', '@desc', 'Workflow for cleaning Chicago Food Inspection DataSet').
+annotation(3, 1, 3, 'in', '@in', 'Food_inspection.csv').
+annotation(4, 1, 3, 'uri', '@uri', 'file://data/Food_inspection.csv').
+annotation(5, 1, 6, 'begin', '@begin', 'CleanWithOpenRefine').
+annotation(6, 1, 6, 'desc', '@desc', 'Use OpenRefine to clean csv dataset').
+annotation(7, 1, 7, 'in', '@in', 'Food_inspection.csv').
+annotation(8, 1, 7, 'uri', '@uri', 'file://data/Food_inspection.csv').
+annotation(9, 1, 8, 'param', '@param', 'OpenrefineCleaningOperationsSequence').
+annotation(10, 1, 9, 'out', '@out', 'Food-Inspections-07182023.csv').
+annotation(11, 1, 9, 'uri', '@uri', 'file://data/Food-Inspections-07182023.csv').
+annotation(12, 1, 10, 'end', '@end', 'CleanWithOpenRefine').
+annotation(13, 1, 12, 'begin', '@begin', 'SeparateTables').
+annotation(14, 1, 12, 'desc', '@desc', 'Use Python to separate data into 4 tables').
+annotation(15, 1, 13, 'in', '@in', 'Food-Inspections-07182023.csv').
+annotation(16, 1, 13, 'uri', '@uri', 'file://data/Food-Inspections-07182023.csv').
+annotation(17, 1, 14, 'out', '@out', 'business.csv').
+annotation(18, 1, 14, 'uri', '@uri', 'file://data/business.csv').
+annotation(19, 1, 15, 'out', '@out', 'inspections.csv').
+annotation(20, 1, 15, 'uri', '@uri', 'file://data/inspections.csv').
+annotation(21, 1, 16, 'out', '@out', 'locations.csv').
+annotation(22, 1, 16, 'uri', '@uri', 'file://data/locations.csv').
+annotation(23, 1, 17, 'out', '@out', 'violations.csv').
+annotation(24, 1, 17, 'uri', '@uri', 'file://data/violations.csv').
+annotation(25, 1, 18, 'end', '@end', 'SeparateTables').
+annotation(26, 1, 20, 'begin', '@begin', 'FunctionalDependencyChecks').
+annotation(27, 1, 20, 'desc', '@desc', 'Use Python to perform initial FD checks').
+annotation(28, 1, 21, 'in', '@in', 'Food-Inspections-07182023.csv').
+annotation(29, 1, 21, 'uri', '@uri', 'file://data/Food-Inspections-07182023.csv').
+annotation(30, 1, 22, 'end', '@end', 'FunctionalDependencyChecks').
+annotation(31, 1, 24, 'begin', '@begin', 'SQLiteQualityAssessment').
+annotation(32, 1, 24, 'desc', '@desc', 'Perform quality assessment in SQLite').
+annotation(33, 1, 25, 'in', '@in', 'business.csv').
+annotation(34, 1, 25, 'uri', '@uri', 'file://data/business.csv').
+annotation(35, 1, 26, 'in', '@in', 'inspections.csv').
+annotation(36, 1, 26, 'uri', '@uri', 'file://data/inspections.csv').
+annotation(37, 1, 27, 'in', '@in', 'locations.csv').
+annotation(38, 1, 27, 'uri', '@uri', 'file://data/locations.csv').
+annotation(39, 1, 28, 'in', '@in', 'violations.csv').
+annotation(40, 1, 28, 'uri', '@uri', 'file://data/violations.csv').
+annotation(41, 1, 29, 'out', '@out', 'business_clean.csv').
+annotation(42, 1, 29, 'uri', '@uri', 'file://data/business_clean.csv').
+annotation(43, 1, 30, 'out', '@out', 'inspections_clean.csv').
+annotation(44, 1, 30, 'uri', '@uri', 'file://data/inspections_clean.csv').
+annotation(45, 1, 31, 'out', '@out', 'locations_clean.csv').
+annotation(46, 1, 31, 'uri', '@uri', 'file://data/locations_clean.csv').
+annotation(47, 1, 32, 'out', '@out', 'violations_clean.csv').
+annotation(48, 1, 32, 'uri', '@uri', 'file://data/violations_clean.csv').
+annotation(49, 1, 33, 'end', '@end', 'SQLiteQualityAssessment').
+annotation(50, 1, 35, 'out', '@out', 'business_clean.csv').
+annotation(51, 1, 35, 'uri', '@uri', 'file://data/business_clean.csv').
+annotation(52, 1, 36, 'out', '@out', 'inspections_clean.csv').
+annotation(53, 1, 36, 'uri', '@uri', 'file://data/inspections_clean.csv').
+annotation(54, 1, 37, 'out', '@out', 'locations_clean.csv').
+annotation(55, 1, 37, 'uri', '@uri', 'file://data/locations_clean.csv').
+annotation(56, 1, 38, 'out', '@out', 'violations_clean.csv').
+annotation(57, 1, 38, 'uri', '@uri', 'file://data/violations_clean.csv').
+annotation(58, 1, 40, 'end', '@end', 'DataCleanup').
+
+% FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
+annotation_qualifies(2, 1).
+annotation_qualifies(4, 3).
+annotation_qualifies(6, 5).
+annotation_qualifies(8, 7).
+annotation_qualifies(11, 10).
+annotation_qualifies(14, 13).
+annotation_qualifies(16, 15).
+annotation_qualifies(18, 17).
+annotation_qualifies(20, 19).
+annotation_qualifies(22, 21).
+annotation_qualifies(24, 23).
+annotation_qualifies(27, 26).
+annotation_qualifies(29, 28).
+annotation_qualifies(32, 31).
+annotation_qualifies(34, 33).
+annotation_qualifies(36, 35).
+annotation_qualifies(38, 37).
+annotation_qualifies(40, 39).
+annotation_qualifies(42, 41).
+annotation_qualifies(44, 43).
+annotation_qualifies(46, 45).
+annotation_qualifies(48, 47).
+annotation_qualifies(51, 50).
+annotation_qualifies(53, 52).
+annotation_qualifies(55, 54).
+annotation_qualifies(57, 56).

@@ -1,0 +1,42 @@
+''' 
+@begin Data_Cleaning_Workflow @desc Workflow for cleaning Chicago Food Inspection DataSet
+@in Food_inspection.csv @uri file://data/Food_inspection.csv
+
+
+    @begin CleanWithOpenRefine @desc Use OpenRefine to clean csv dataset
+    @in Food_inspection.csv @uri file://data/Food_inspection.csv
+    @param OpenrefineCleaningOperationsSequence
+    @out Food-Inspections-07182023.csv @uri file://data/Food-Inspections-07182023.csv
+    @end CleanWithOpenRefine
+    
+    @begin SeparateTables @desc Use Python to separate data into 4 tables
+    @in Food-Inspections-07182023.csv @uri file://data/Food-Inspections-07182023.csv
+    @out business.csv @uri file://data/business.csv
+    @out inspections.csv @uri file://data/inspections.csv
+    @out locations.csv @uri file://data/locations.csv
+    @out violations.csv @uri file://data/violations.csv
+    @end SeparateTables
+    
+    @begin FunctionalDependencyChecks @desc Use Python to perform initial FD checks
+    @in Food-Inspections-07182023.csv @uri file://data/Food-Inspections-07182023.csv
+    @end FunctionalDependencyChecks
+    
+    @begin SQLiteQualityAssessment @desc Perform quality assessment in SQLite
+    @in business.csv @uri file://data/business.csv
+    @in inspections.csv @uri file://data/inspections.csv
+    @in locations.csv @uri file://data/locations.csv
+    @in violations.csv @uri file://data/violations.csv
+    @out business_clean.csv @uri file://data/business_clean.csv
+    @out inspections_clean.csv @uri file://data/inspections_clean.csv
+    @out locations_clean.csv @uri file://data/locations_clean.csv
+    @out violations_clean.csv @uri file://data/violations_clean.csv
+    @end SQLiteQualityAssessment
+
+@out business_clean.csv @uri file://data/business_clean.csv
+@out inspections_clean.csv @uri file://data/inspections_clean.csv
+@out locations_clean.csv @uri file://data/locations_clean.csv
+@out violations_clean.csv @uri file://data/violations_clean.csv
+
+@end DataCleanup
+
+'''

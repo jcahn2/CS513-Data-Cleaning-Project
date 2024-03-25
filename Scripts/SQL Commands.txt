@@ -1,0 +1,97 @@
+
+#SQL commands to prepare the databse in SQLlite3
+sqlite3 inspections.db
+sqlite> .databases
+main: C:\Users\ratul\Documents\Study\MCS-DS\CS 513 Theory and Practice of Data Cleaning\sqllite3\inspections.db r/w
+sqlite> .mode csv
+sqlite> .import business.csv businesses
+sqlite> .schema businesses
+CREATE TABLE IF NOT EXISTS "businesses"(
+"License #" TEXT, "Dt" TEXT, "DBA Name" TEXT, "AKA Name" TEXT,
+ "Facility Type" TEXT, "Inspection Date" TEXT, "License # - Flag" TEXT);
+
+sqlite> select count(*) from businesses;
+32849
+
+sqlite> select count(*) from businesses where "License #" = '0';
+0
+
+sqlite> select count(*) from businesses where "DBA Name" = '' or "AKA Name" = '';
+0
+
+sqlite> select count(*) from businesses where "License # - Flag" <> 'Correct';
+0
+
+sqlite> select "License #", count("License #") as cnt_id from businesses group by "License #" having count("License #")
+> 1;
+sqlite>
+
+sqlite> select * from businesses where "License #" in (select distinct "License #" from (select "License #", count(*) from businesses group by "License #" having count(*)>1) ) order by "License #";
+sqlite>
+
+---------------------------------------
+
+sqlite> .mode csv
+sqlite> .import locations.csv locations
+sqlite> .schema locations
+CREATE TABLE IF NOT EXISTS "locations"(
+"Location ID" TEXT, "Address" TEXT, "City" TEXT, "State" TEXT,
+ "Zip" TEXT, "Latitude" TEXT, "Longitude" TEXT, "Location" TEXT);
+sqlite> select count(*) from locations;
+16875
+
+sqlite> select * from locations where Address = '' or City = '' or State = '' or Zip = '';
+"Location ID",Address,City,State,Zip,Latitude,Longitude,Location
+0,"","",IL,0,"","","-,-"
+1,"",CHICAGO,IL,60654,"","","-,-"
+
+----------------------------------------
+
+sqlite> .mode csv
+sqlite> .import violations.csv violations
+sqlite> .schema violations
+CREATE TABLE IF NOT EXISTS "violations"(
+"Violation ID" TEXT, "Inspection ID" TEXT, "Results" TEXT, "Violation Order" TEXT,
+ "Violation Text" TEXT, "Violation Code" TEXT, "Violation Type" TEXT, "Violation Flag" TEXT);
+sqlite> select count(*) from violations;
+count(*)
+535130
+
+sqlite> select count(distinct "Violation Order") as cnt_vio_order from violations;
+cnt_vio_order
+23
+
+sqlite> select count(distinct "Violation Code") as cnt_vio_code from violations;
+cnt_vio_code
+46
+
+sqlite> select distinct "Violation Code" from violations where "Violation Code"*1 > 45;
+"Violation Code"
+70
+
+sqlite> select min("Violation Code"*1), max("Violation Code"*1) from violations where "Violation Code"*1 < 70;
+"min(""Violation Code""*1)","max(""Violation Code""*1)"
+1,45
+
+---------------------------------
+
+sqlite> .mode csv
+sqlite> .import inspections.csv inspections
+sqlite> .schema inspections
+CREATE TABLE IF NOT EXISTS "inspections"(
+"License #" TEXT, "Inspection ID" TEXT, "Inspection Date" TEXT, "Inspection Type" TEXT,
+ "Risk Category" TEXT, "Results" TEXT, "Location ID" TEXT);
+sqlite>
+
+sqlite> select i."Inspection ID", b."License #" from inspections i left join businesses b on i."License #"=b."License #" where b."License #" is NULL;
+sqlite>
+
+sqlite> select i."Inspection ID", l."Location ID" from inspections i left join locations l on i."Location ID"=l."Location ID" where l."Location ID" is NULL;
+
+sqlite> select count(distinct v."Inspection ID") as cnt_dstnt from violations v left join inspections i on i."Inspection ID"=v."Inspection ID" where i."Inspection ID" is NULL;
+
+sqlite> select distinct i."Inspection ID", b."License #", l."Location ID" from inspections i left join businesses b on i."License #"=b."License #" left join locations l on i."Location ID"=l."Location ID"  where b."License #" is NULL or l."Location ID" is NULL;
+
+---------------------------
+
+sqlite3 inspections.db '.schema DATABASE.*' > database_schema.sql

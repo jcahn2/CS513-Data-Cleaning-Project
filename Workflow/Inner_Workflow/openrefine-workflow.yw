@@ -1,0 +1,1447 @@
+#@begin Parallel_OR #@desc Parallel OpenRefine Workflow
+#@param expression:value.toNumber()
+#@param removeOriginalColumn:False
+#@param expression:grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,"").replace("_","_").replace(/[\\p{Zs}\\s]+/,'_')
+#@param expression:value.toUppercase()
+#@param newColumnName:Inspection_Day
+#@param expression:grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,"").replace("_","_").replace(/[\\p{Zs}\\s]+/,"_")
+#@param expression:grel:value.replace(/\\(|\\)/,'')
+#@param expression:value.trim()
+#@param separator:|
+#@param newColumnName:Inspection_Month
+#@param separator:/
+#@param oldColumnName:Inspection_Date_2
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@param oldColumnName:Inspection_Date_3
+#@param expression:grel:if(isBlank(value),'IL','IL')
+#@param newColumnName:Inspection_Year
+#@param oldColumnName:Inspection_Date_1
+#@param expression:value
+#@in Inspection_Date_3_1
+#@in Latitude
+#@in Violations_12_1
+#@in Inspection_Type_-_Clean_37
+#@in Facility_Type_-_Clean_3
+#@in Inspection_Type_-_Clean_49
+#@in Violations
+#@in Facility_Type_-_Clean_77
+#@in Inspection_Type_-_Clean_21
+#@in Inspection_Date_2_1
+#@in Facility_Type_-_Clean_2
+#@in Facility_Type_-_Clean_68
+#@in Facility_Type_-_Clean_42
+#@in Violations_23_1
+#@in Inspection_Type_-_Clean_20
+#@in Facility_Type_-_Clean_7
+#@in Facility_Type_-_Clean_25
+#@in Facility_Type_-_Clean_11
+#@in Facility_Type_-_Clean_52
+#@in Facility_Type_-_Clean_69
+#@in Facility_Type_-_Clean_73
+#@in Facility_Type_-_Clean_20
+#@in Violations_19_2
+#@in Violations_16_1
+#@in City_-_Clean
+#@in Inspection_Type_-_Clean_51
+#@in Facility_Type_1
+#@in Inspection_Type_-_Clean_11
+#@in Inspection_Type_-_Clean_23
+#@in Inspection_Type_-_Clean_35
+#@in Inspection_Type_-_Clean_40
+#@in Inspection_Type_-_Clean_41
+#@in Facility_Type_-_Clean_18
+#@in Violations_7_2
+#@in Violations_4_2
+#@in Address_-_Clean_1
+#@in Inspection_Type_-_Clean_34
+#@in Facility_Type_-_Clean_64
+#@in Inspection_Type_-_Clean_30
+#@in Facility_Type_-_Clean_44
+#@in Facility_Type_-_Clean_76
+#@in Address_-_Clean
+#@in Inspection_Type_-_Clean_10
+#@in Facility_Type_-_Clean_38
+#@in Facility_Type_-_Clean_51
+#@in Longitude_1
+#@in Facility_Type_-_Clean_65
+#@in Violations_14_2
+#@in License_-_Flag
+#@in Facility_Type_-_Clean_71
+#@in Inspection_Type_-_Clean_12
+#@in Violations_15_1
+#@in Violations_7_1
+#@in Violations_13_1
+#@in Violations_18_1
+#@in Inspection_Type_-_Clean_54
+#@in Facility_Type_-_Clean_14
+#@in Inspection_Type_-_Clean_7
+#@in Facility_Type_-_Clean_19
+#@in Violations_6_2
+#@in Facility_Type_-_Clean_48
+#@in Facility_Type_-_Clean_56
+#@in Facility_Type_-_Clean_78
+#@in Violations_10_1
+#@in Inspection_Type_-_Clean_4
+#@in Facility_Type_-_Clean_54
+#@in Inspection_Type_-_Clean_18
+#@in Longitude
+#@in Facility_Type_-_Clean_63
+#@in Facility_Type_-_Clean_80
+#@in Inspection_Date_1_1
+#@in Violations_17_2
+#@in Facility_Type_-_Clean_53
+#@in Facility_Type_-_Clean_9
+#@in Inspection_Type_-_Clean_26
+#@in Violations_14_1
+#@in Inspection_Type_-_Clean_19
+#@in Inspection_Type_-_Clean_24
+#@in Inspection_Type_-_Clean_56
+#@in Inspection_Type_-_Clean
+#@in Violations_2_1
+#@in Violations_8_1
+#@in Facility_Type_-_Clean_58
+#@in Inspection_Type_-_Clean_5
+#@in Facility_Type_-_Clean_47
+#@in Inspection_Type_-_Clean_22
+#@in Violations_1_1
+#@in Inspection_Type_-_Clean_44
+#@in Inspection_Type_-_Clean_3
+#@in Facility_Type_-_Clean_15
+#@in Facility_Type_-_Clean_10
+#@in Facility_Type_-_Clean_60
+#@in Violations_3_2
+#@in Violations_8_2
+#@in Inspection_Type_-_Clean_45
+#@in Inspection_Type_-_Clean_6
+#@in Inspection_Type_-_Clean_52
+#@in Facility_Type_-_Clean_62
+#@in Violations_13_2
+#@in Facility_Type_-_Clean_57
+#@in Facility_Type_-_Clean_45
+#@in Inspection_Type_-_Clean_2
+#@in Violations_10_2
+#@in State
+#@in Inspection_Type_-_Clean_25
+#@in Facility_Type_-_Clean_61
+#@in DBA_Name_-_Clean
+#@in Inspection_Type_-_Clean_27
+#@in Inspection_Type_-_Clean_17
+#@in Facility_Type_-_Clean_31
+#@in Facility_Type_-_Clean_74
+#@in Violations_12_2
+#@in Inspection_Type_-_Clean_13
+#@in Inspection_Type_-_Clean_32
+#@in Facility_Type_-_Clean_39
+#@in Facility_Type_-_Clean_37
+#@in Violations_21_1
+#@in Violations_11_2
+#@in Violations_20_1
+#@in Inspection_Type_-_Clean_33
+#@in Violations_16_2
+#@in Inspection_Type_-_Clean_29
+#@in Facility_Type_-_Clean_21
+#@in Facility_Type_-_Clean_55
+#@in Inspection_Type_-_Clean_1
+#@in Inspection_Type_-_Clean_36
+#@in Violations_5_1
+#@in Facility_Type_-_Clean_6
+#@in Inspection_Type_-_Clean_8
+#@in Facility_Type_-_Clean_66
+#@in Inspection_Type_-_Clean_42
+#@in Facility_Type_-_Clean_5
+#@in Inspection_Type_-_Clean_53
+#@in Violations_15_2
+#@in Facility_Type_-_Clean
+#@in Inspection_Type_-_Clean_15
+#@in Inspection_Type_-_Clean_9
+#@in Facility_Type
+#@in Inspection_Type_-_Clean_38
+#@in Facility_Type_-_Clean_30
+#@in Facility_Type_-_Clean_13
+#@in Facility_Type_-_Clean_24
+#@in Facility_Type_-_Clean_33
+#@in Facility_Type_-_Clean_72
+#@in Violations_5_2
+#@in Violations_22_2
+#@in Facility_Type_-_Clean_12
+#@in Facility_Type_-_Clean_17
+#@in Facility_Type_-_Clean_32
+#@in Violations_23_2
+#@in Facility_Type_-_Clean_40
+#@in Violations_6_1
+#@in Inspection_Type_-_Clean_48
+#@in Location
+#@in Location_1
+#@in Inspection_Type_-_Clean_43
+#@in Inspection_Type_-_Clean_46
+#@in Facility_Type_-_Clean_22
+#@in Facility_Type_-_Clean_67
+#@in Facility_Type_-_Clean_82
+#@in Facility_Type_-_Clean_36
+#@in Inspection_Type_-_Clean_31
+#@in Facility_Type_-_Clean_50
+#@in Violations_17_1
+#@in Facility_Type_-_Clean_81
+#@in Inspection_Type_-_Clean_16
+#@in Inspection_Date
+#@in Facility_Type_-_Clean_49
+#@in Facility_Type_-_Clean_41
+#@in Violations_19_1
+#@in Facility_Type_-_Clean_43
+#@in Inspection_Type_-_Clean_50
+#@in Inspection_Type_-_Clean_39
+#@in Inspection_Type_-_Clean_55
+#@in Facility_Type_-_Clean_1
+#@in Facility_Type_-_Clean_35
+#@in Facility_Type_-_Clean_29
+#@in Facility_Type_-_Clean_79
+#@in Violations_11_1
+#@in Facility_Type_-_Clean_26
+#@in Violations_4_1
+#@in Facility_Type_-_Clean_46
+#@in State_1
+#@in Facility_Type_-_Clean_4
+#@in Violations_22_1
+#@in Violations_1_2
+#@in Facility_Type_-_Clean_70
+#@in Violations_21_2
+#@in Violations_9_1
+#@in Violations_3_1
+#@in Facility_Type_-_Clean_75
+#@in Violations_20_2
+#@in Facility_Type_-_Clean_27
+#@in Violations_18_2
+#@in Inspection_Type_-_Clean_14
+#@in Violations_9_2
+#@in Facility_Type_-_Clean_23
+#@in Facility_Type_-_Clean_34
+#@in Facility_Type_-_Clean_16
+#@in Inspection_Type_-_Clean_28
+#@in Facility_Type_-_Clean_28
+#@in Inspection_Type_-_Clean_47
+#@in Facility_Type_-_Clean_59
+#@in Latitude_1
+#@in Facility_Type_-_Clean_8
+#@out CleanData
+#@begin core/column-removal0 #@desc Remove column DBA Name - Clean
+#@in DBA_Name_-_Clean
+#@out remove-DBA_Name_-_Clean
+#@end core/column-removal0
+#@begin core/column-removal1 #@desc Remove column License - Flag
+#@in License_-_Flag
+#@out remove-License_-_Flag
+#@end core/column-removal1
+#@begin core/mass-edit2 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean
+#@out Inspection_Type_-_Clean_1
+#@end core/mass-edit2
+#@begin core/mass-edit3 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_1
+#@out Inspection_Type_-_Clean_2
+#@end core/mass-edit3
+#@begin core/mass-edit4 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_2
+#@out Inspection_Type_-_Clean_3
+#@end core/mass-edit4
+#@begin core/mass-edit5 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_3
+#@out Inspection_Type_-_Clean_4
+#@end core/mass-edit5
+#@begin core/mass-edit6 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_4
+#@out Inspection_Type_-_Clean_5
+#@end core/mass-edit6
+#@begin core/mass-edit7 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_5
+#@out Inspection_Type_-_Clean_6
+#@end core/mass-edit7
+#@begin core/mass-edit8 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_6
+#@out Inspection_Type_-_Clean_7
+#@end core/mass-edit8
+#@begin core/mass-edit9 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_7
+#@out Inspection_Type_-_Clean_8
+#@end core/mass-edit9
+#@begin core/mass-edit10 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_8
+#@out Inspection_Type_-_Clean_9
+#@end core/mass-edit10
+#@begin core/mass-edit11 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_9
+#@out Inspection_Type_-_Clean_10
+#@end core/mass-edit11
+#@begin core/mass-edit12 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_10
+#@out Inspection_Type_-_Clean_11
+#@end core/mass-edit12
+#@begin core/mass-edit13 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_11
+#@out Inspection_Type_-_Clean_12
+#@end core/mass-edit13
+#@begin core/mass-edit14 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_12
+#@out Inspection_Type_-_Clean_13
+#@end core/mass-edit14
+#@begin core/mass-edit15 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_13
+#@out Inspection_Type_-_Clean_14
+#@end core/mass-edit15
+#@begin core/mass-edit16 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_14
+#@out Inspection_Type_-_Clean_15
+#@end core/mass-edit16
+#@begin core/mass-edit17 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_15
+#@out Inspection_Type_-_Clean_16
+#@end core/mass-edit17
+#@begin core/mass-edit18 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_16
+#@out Inspection_Type_-_Clean_17
+#@end core/mass-edit18
+#@begin core/mass-edit19 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_17
+#@out Inspection_Type_-_Clean_18
+#@end core/mass-edit19
+#@begin core/mass-edit20 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_18
+#@out Inspection_Type_-_Clean_19
+#@end core/mass-edit20
+#@begin core/mass-edit21 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_19
+#@out Inspection_Type_-_Clean_20
+#@end core/mass-edit21
+#@begin core/mass-edit22 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_20
+#@out Inspection_Type_-_Clean_21
+#@end core/mass-edit22
+#@begin core/mass-edit23 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_21
+#@out Inspection_Type_-_Clean_22
+#@end core/mass-edit23
+#@begin core/mass-edit24 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_22
+#@out Inspection_Type_-_Clean_23
+#@end core/mass-edit24
+#@begin core/mass-edit25 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_23
+#@out Inspection_Type_-_Clean_24
+#@end core/mass-edit25
+#@begin core/mass-edit26 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_24
+#@out Inspection_Type_-_Clean_25
+#@end core/mass-edit26
+#@begin core/mass-edit27 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_25
+#@out Inspection_Type_-_Clean_26
+#@end core/mass-edit27
+#@begin core/mass-edit28 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_26
+#@out Inspection_Type_-_Clean_27
+#@end core/mass-edit28
+#@begin core/mass-edit29 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_27
+#@out Inspection_Type_-_Clean_28
+#@end core/mass-edit29
+#@begin core/mass-edit30 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_28
+#@out Inspection_Type_-_Clean_29
+#@end core/mass-edit30
+#@begin core/mass-edit31 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_29
+#@out Inspection_Type_-_Clean_30
+#@end core/mass-edit31
+#@begin core/mass-edit32 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_30
+#@out Inspection_Type_-_Clean_31
+#@end core/mass-edit32
+#@begin core/mass-edit33 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_31
+#@out Inspection_Type_-_Clean_32
+#@end core/mass-edit33
+#@begin core/mass-edit34 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_32
+#@out Inspection_Type_-_Clean_33
+#@end core/mass-edit34
+#@begin core/mass-edit35 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_33
+#@out Inspection_Type_-_Clean_34
+#@end core/mass-edit35
+#@begin core/mass-edit36 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_34
+#@out Inspection_Type_-_Clean_35
+#@end core/mass-edit36
+#@begin core/mass-edit37 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_35
+#@out Inspection_Type_-_Clean_36
+#@end core/mass-edit37
+#@begin core/mass-edit38 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_36
+#@out Inspection_Type_-_Clean_37
+#@end core/mass-edit38
+#@begin core/mass-edit39 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_37
+#@out Inspection_Type_-_Clean_38
+#@end core/mass-edit39
+#@begin core/mass-edit40 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_38
+#@out Inspection_Type_-_Clean_39
+#@end core/mass-edit40
+#@begin core/mass-edit41 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_39
+#@out Inspection_Type_-_Clean_40
+#@end core/mass-edit41
+#@begin core/mass-edit42 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_40
+#@out Inspection_Type_-_Clean_41
+#@end core/mass-edit42
+#@begin core/mass-edit43 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_41
+#@out Inspection_Type_-_Clean_42
+#@end core/mass-edit43
+#@begin core/mass-edit44 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_42
+#@out Inspection_Type_-_Clean_43
+#@end core/mass-edit44
+#@begin core/mass-edit45 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_43
+#@out Inspection_Type_-_Clean_44
+#@end core/mass-edit45
+#@begin core/mass-edit46 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_44
+#@out Inspection_Type_-_Clean_45
+#@end core/mass-edit46
+#@begin core/mass-edit47 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_45
+#@out Inspection_Type_-_Clean_46
+#@end core/mass-edit47
+#@begin core/mass-edit48 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_46
+#@out Inspection_Type_-_Clean_47
+#@end core/mass-edit48
+#@begin core/mass-edit49 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_47
+#@out Inspection_Type_-_Clean_48
+#@end core/mass-edit49
+#@begin core/mass-edit50 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_48
+#@out Inspection_Type_-_Clean_49
+#@end core/mass-edit50
+#@begin core/mass-edit51 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_49
+#@out Inspection_Type_-_Clean_50
+#@end core/mass-edit51
+#@begin core/mass-edit52 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_50
+#@out Inspection_Type_-_Clean_51
+#@end core/mass-edit52
+#@begin core/mass-edit53 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_51
+#@out Inspection_Type_-_Clean_52
+#@end core/mass-edit53
+#@begin core/mass-edit54 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_52
+#@out Inspection_Type_-_Clean_53
+#@end core/mass-edit54
+#@begin core/mass-edit55 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_53
+#@out Inspection_Type_-_Clean_54
+#@end core/mass-edit55
+#@begin core/mass-edit56 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_54
+#@out Inspection_Type_-_Clean_55
+#@end core/mass-edit56
+#@begin core/mass-edit57 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_55
+#@out Inspection_Type_-_Clean_56
+#@end core/mass-edit57
+#@begin core/mass-edit58 #@desc Mass edit cells in column Inspection Type - Clean
+#@param expression:value
+#@in Inspection_Type_-_Clean_56
+#@out Inspection_Type_-_Clean_57
+#@end core/mass-edit58
+#@begin core/column-split59 #@desc Split column Inspection Date by separator
+#@param removeOriginalColumn:False
+#@param separator:/
+#@in Inspection_Date
+#@out Inspection_Date_1
+#@out Inspection_Date_1_1
+#@out Inspection_Date_2_1
+#@out Inspection_Date_3_1
+#@end core/column-split59
+#@begin core/column-rename60 #@desc Rename column Inspection Date 1 to Inspection Month
+#@param oldColumnName:Inspection_Date_1
+#@param newColumnName:Inspection_Month
+#@in Inspection_Date_1_1
+#@out Inspection_Month
+#@end core/column-rename60
+#@begin core/column-rename61 #@desc Rename column Inspection Date 2 to Inspection Day
+#@param oldColumnName:Inspection_Date_2
+#@param newColumnName:Inspection_Day
+#@in Inspection_Date_2_1
+#@out Inspection_Day
+#@end core/column-rename61
+#@begin core/column-rename62 #@desc Rename column Inspection Date 3 to Inspection Year
+#@param oldColumnName:Inspection_Date_3
+#@param newColumnName:Inspection_Year
+#@in Inspection_Date_3_1
+#@out Inspection_Year
+#@end core/column-rename62
+#@begin core/mass-edit63 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type
+#@out Facility_Type_1
+#@end core/mass-edit63
+#@begin core/mass-edit64 #@desc Mass edit cells in column Facility Type
+#@param expression:value
+#@in Facility_Type_1
+#@out Facility_Type_2
+#@end core/mass-edit64
+#@begin core/mass-edit65 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean
+#@out Facility_Type_-_Clean_1
+#@end core/mass-edit65
+#@begin core/mass-edit66 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_1
+#@out Facility_Type_-_Clean_2
+#@end core/mass-edit66
+#@begin core/mass-edit67 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_2
+#@out Facility_Type_-_Clean_3
+#@end core/mass-edit67
+#@begin core/mass-edit68 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_3
+#@out Facility_Type_-_Clean_4
+#@end core/mass-edit68
+#@begin core/mass-edit69 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_4
+#@out Facility_Type_-_Clean_5
+#@end core/mass-edit69
+#@begin core/mass-edit70 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_5
+#@out Facility_Type_-_Clean_6
+#@end core/mass-edit70
+#@begin core/mass-edit71 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_6
+#@out Facility_Type_-_Clean_7
+#@end core/mass-edit71
+#@begin core/mass-edit72 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_7
+#@out Facility_Type_-_Clean_8
+#@end core/mass-edit72
+#@begin core/mass-edit73 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_8
+#@out Facility_Type_-_Clean_9
+#@end core/mass-edit73
+#@begin core/mass-edit74 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_9
+#@out Facility_Type_-_Clean_10
+#@end core/mass-edit74
+#@begin core/mass-edit75 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_10
+#@out Facility_Type_-_Clean_11
+#@end core/mass-edit75
+#@begin core/mass-edit76 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_11
+#@out Facility_Type_-_Clean_12
+#@end core/mass-edit76
+#@begin core/column-removal77 #@desc Remove column Facility Type - Clean
+#@in Facility_Type_-_Clean_12
+#@out remove-Facility_Type_-_Clean
+#@end core/column-removal77
+#@begin core/mass-edit78 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_12
+#@out Facility_Type_-_Clean_13
+#@end core/mass-edit78
+#@begin core/mass-edit79 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_13
+#@out Facility_Type_-_Clean_14
+#@end core/mass-edit79
+#@begin core/mass-edit80 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_14
+#@out Facility_Type_-_Clean_15
+#@end core/mass-edit80
+#@begin core/mass-edit81 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_15
+#@out Facility_Type_-_Clean_16
+#@end core/mass-edit81
+#@begin core/mass-edit82 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_16
+#@out Facility_Type_-_Clean_17
+#@end core/mass-edit82
+#@begin core/mass-edit83 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_17
+#@out Facility_Type_-_Clean_18
+#@end core/mass-edit83
+#@begin core/mass-edit84 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_18
+#@out Facility_Type_-_Clean_19
+#@end core/mass-edit84
+#@begin core/mass-edit85 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_19
+#@out Facility_Type_-_Clean_20
+#@end core/mass-edit85
+#@begin core/mass-edit86 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_20
+#@out Facility_Type_-_Clean_21
+#@end core/mass-edit86
+#@begin core/mass-edit87 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_21
+#@out Facility_Type_-_Clean_22
+#@end core/mass-edit87
+#@begin core/mass-edit88 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_22
+#@out Facility_Type_-_Clean_23
+#@end core/mass-edit88
+#@begin core/mass-edit89 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_23
+#@out Facility_Type_-_Clean_24
+#@end core/mass-edit89
+#@begin core/mass-edit90 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_24
+#@out Facility_Type_-_Clean_25
+#@end core/mass-edit90
+#@begin core/mass-edit91 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_25
+#@out Facility_Type_-_Clean_26
+#@end core/mass-edit91
+#@begin core/mass-edit92 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_26
+#@out Facility_Type_-_Clean_27
+#@end core/mass-edit92
+#@begin core/mass-edit93 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_27
+#@out Facility_Type_-_Clean_28
+#@end core/mass-edit93
+#@begin core/mass-edit94 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_28
+#@out Facility_Type_-_Clean_29
+#@end core/mass-edit94
+#@begin core/mass-edit95 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_29
+#@out Facility_Type_-_Clean_30
+#@end core/mass-edit95
+#@begin core/mass-edit96 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_30
+#@out Facility_Type_-_Clean_31
+#@end core/mass-edit96
+#@begin core/mass-edit97 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_31
+#@out Facility_Type_-_Clean_32
+#@end core/mass-edit97
+#@begin core/mass-edit98 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_32
+#@out Facility_Type_-_Clean_33
+#@end core/mass-edit98
+#@begin core/mass-edit99 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_33
+#@out Facility_Type_-_Clean_34
+#@end core/mass-edit99
+#@begin core/mass-edit100 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_34
+#@out Facility_Type_-_Clean_35
+#@end core/mass-edit100
+#@begin core/mass-edit101 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_35
+#@out Facility_Type_-_Clean_36
+#@end core/mass-edit101
+#@begin core/mass-edit102 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_36
+#@out Facility_Type_-_Clean_37
+#@end core/mass-edit102
+#@begin core/mass-edit103 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_37
+#@out Facility_Type_-_Clean_38
+#@end core/mass-edit103
+#@begin core/mass-edit104 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_38
+#@out Facility_Type_-_Clean_39
+#@end core/mass-edit104
+#@begin core/mass-edit105 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_39
+#@out Facility_Type_-_Clean_40
+#@end core/mass-edit105
+#@begin core/mass-edit106 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_40
+#@out Facility_Type_-_Clean_41
+#@end core/mass-edit106
+#@begin core/mass-edit107 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_41
+#@out Facility_Type_-_Clean_42
+#@end core/mass-edit107
+#@begin core/mass-edit108 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_42
+#@out Facility_Type_-_Clean_43
+#@end core/mass-edit108
+#@begin core/mass-edit109 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_43
+#@out Facility_Type_-_Clean_44
+#@end core/mass-edit109
+#@begin core/mass-edit110 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_44
+#@out Facility_Type_-_Clean_45
+#@end core/mass-edit110
+#@begin core/mass-edit111 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_45
+#@out Facility_Type_-_Clean_46
+#@end core/mass-edit111
+#@begin core/mass-edit112 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_46
+#@out Facility_Type_-_Clean_47
+#@end core/mass-edit112
+#@begin core/mass-edit113 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_47
+#@out Facility_Type_-_Clean_48
+#@end core/mass-edit113
+#@begin core/mass-edit114 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_48
+#@out Facility_Type_-_Clean_49
+#@end core/mass-edit114
+#@begin core/mass-edit115 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_49
+#@out Facility_Type_-_Clean_50
+#@end core/mass-edit115
+#@begin core/mass-edit116 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_50
+#@out Facility_Type_-_Clean_51
+#@end core/mass-edit116
+#@begin core/mass-edit117 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_51
+#@out Facility_Type_-_Clean_52
+#@end core/mass-edit117
+#@begin core/mass-edit118 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_52
+#@out Facility_Type_-_Clean_53
+#@end core/mass-edit118
+#@begin core/mass-edit119 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_53
+#@out Facility_Type_-_Clean_54
+#@end core/mass-edit119
+#@begin core/mass-edit120 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_54
+#@out Facility_Type_-_Clean_55
+#@end core/mass-edit120
+#@begin core/mass-edit121 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_55
+#@out Facility_Type_-_Clean_56
+#@end core/mass-edit121
+#@begin core/mass-edit122 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_56
+#@out Facility_Type_-_Clean_57
+#@end core/mass-edit122
+#@begin core/mass-edit123 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_57
+#@out Facility_Type_-_Clean_58
+#@end core/mass-edit123
+#@begin core/mass-edit124 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_58
+#@out Facility_Type_-_Clean_59
+#@end core/mass-edit124
+#@begin core/mass-edit125 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_59
+#@out Facility_Type_-_Clean_60
+#@end core/mass-edit125
+#@begin core/mass-edit126 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_60
+#@out Facility_Type_-_Clean_61
+#@end core/mass-edit126
+#@begin core/mass-edit127 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_61
+#@out Facility_Type_-_Clean_62
+#@end core/mass-edit127
+#@begin core/mass-edit128 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_62
+#@out Facility_Type_-_Clean_63
+#@end core/mass-edit128
+#@begin core/mass-edit129 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_63
+#@out Facility_Type_-_Clean_64
+#@end core/mass-edit129
+#@begin core/mass-edit130 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_64
+#@out Facility_Type_-_Clean_65
+#@end core/mass-edit130
+#@begin core/mass-edit131 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_65
+#@out Facility_Type_-_Clean_66
+#@end core/mass-edit131
+#@begin core/mass-edit132 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_66
+#@out Facility_Type_-_Clean_67
+#@end core/mass-edit132
+#@begin core/mass-edit133 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_67
+#@out Facility_Type_-_Clean_68
+#@end core/mass-edit133
+#@begin core/mass-edit134 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_68
+#@out Facility_Type_-_Clean_69
+#@end core/mass-edit134
+#@begin core/mass-edit135 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_69
+#@out Facility_Type_-_Clean_70
+#@end core/mass-edit135
+#@begin core/mass-edit136 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_70
+#@out Facility_Type_-_Clean_71
+#@end core/mass-edit136
+#@begin core/mass-edit137 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_71
+#@out Facility_Type_-_Clean_72
+#@end core/mass-edit137
+#@begin core/mass-edit138 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_72
+#@out Facility_Type_-_Clean_73
+#@end core/mass-edit138
+#@begin core/mass-edit139 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_73
+#@out Facility_Type_-_Clean_74
+#@end core/mass-edit139
+#@begin core/mass-edit140 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_74
+#@out Facility_Type_-_Clean_75
+#@end core/mass-edit140
+#@begin core/mass-edit141 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_75
+#@out Facility_Type_-_Clean_76
+#@end core/mass-edit141
+#@begin core/mass-edit142 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_76
+#@out Facility_Type_-_Clean_77
+#@end core/mass-edit142
+#@begin core/mass-edit143 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_77
+#@out Facility_Type_-_Clean_78
+#@end core/mass-edit143
+#@begin core/mass-edit144 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_78
+#@out Facility_Type_-_Clean_79
+#@end core/mass-edit144
+#@begin core/mass-edit145 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_79
+#@out Facility_Type_-_Clean_80
+#@end core/mass-edit145
+#@begin core/mass-edit146 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_80
+#@out Facility_Type_-_Clean_81
+#@end core/mass-edit146
+#@begin core/mass-edit147 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_81
+#@out Facility_Type_-_Clean_82
+#@end core/mass-edit147
+#@begin core/mass-edit148 #@desc Mass edit cells in column Facility Type - Clean
+#@param expression:value
+#@in Facility_Type_-_Clean_82
+#@out Facility_Type_-_Clean_83
+#@end core/mass-edit148
+#@begin core/column-split149 #@desc Split column Violations by separator
+#@param removeOriginalColumn:False
+#@param separator:|
+#@in Violations
+#@out Violations_1
+#@out Violations_1_1
+#@out Violations_2_1
+#@out Violations_23_1
+#@out Violations_22_1
+#@out Violations_21_1
+#@out Violations_20_1
+#@out Violations_19_1
+#@out Violations_18_1
+#@out Violations_17_1
+#@out Violations_16_1
+#@out Violations_15_1
+#@out Violations_13_1
+#@out Violations_14_1
+#@out Violations_12_1
+#@out Violations_11_1
+#@out Violations_10_1
+#@out Violations_9_1
+#@out Violations_8_1
+#@out Violations_7_1
+#@out Violations_6_1
+#@out Violations_5_1
+#@out Violations_4_1
+#@out Violations_3_1
+#@end core/column-split149
+#@begin core/text-transform150 #@desc Text transform on cells in column Violations 1 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_1_1
+#@out Violations_1_1
+#@end core/text-transform150
+#@begin core/text-transform151 #@desc Text transform on cells in column Violations 1 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_1_1
+#@out Violations_1_2
+#@end core/text-transform151
+#@begin core/text-transform152 #@desc Text transform on cells in column Violations 1 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_1_2
+#@out Violations_1_3
+#@end core/text-transform152
+#@begin core/text-transform153 #@desc Text transform on cells in column Violations 2 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_2_1
+#@out Violations_2_1
+#@end core/text-transform153
+#@begin core/text-transform154 #@desc Text transform on cells in column Violations 2 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_2_1
+#@out Violations_2_2
+#@end core/text-transform154
+#@begin core/text-transform155 #@desc Text transform on cells in column Violations 23 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_23_1
+#@out Violations_23_1
+#@end core/text-transform155
+#@begin core/text-transform156 #@desc Text transform on cells in column Violations 23 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_23_1
+#@out Violations_23_2
+#@end core/text-transform156
+#@begin core/text-transform157 #@desc Text transform on cells in column Violations 23 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_23_2
+#@out Violations_23_3
+#@end core/text-transform157
+#@begin core/text-transform158 #@desc Text transform on cells in column Violations 22 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_22_1
+#@out Violations_22_1
+#@end core/text-transform158
+#@begin core/text-transform159 #@desc Text transform on cells in column Violations 22 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_22_1
+#@out Violations_22_2
+#@end core/text-transform159
+#@begin core/text-transform160 #@desc Text transform on cells in column Violations 21 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_21_1
+#@out Violations_21_1
+#@end core/text-transform160
+#@begin core/text-transform161 #@desc Text transform on cells in column Violations 22 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_22_2
+#@out Violations_22_3
+#@end core/text-transform161
+#@begin core/text-transform162 #@desc Text transform on cells in column Violations 21 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_21_1
+#@out Violations_21_2
+#@end core/text-transform162
+#@begin core/text-transform163 #@desc Text transform on cells in column Violations 21 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_21_2
+#@out Violations_21_3
+#@end core/text-transform163
+#@begin core/text-transform164 #@desc Text transform on cells in column Violations 20 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_20_1
+#@out Violations_20_1
+#@end core/text-transform164
+#@begin core/text-transform165 #@desc Text transform on cells in column Violations 20 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_20_1
+#@out Violations_20_2
+#@end core/text-transform165
+#@begin core/text-transform166 #@desc Text transform on cells in column Violations 20 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_20_2
+#@out Violations_20_3
+#@end core/text-transform166
+#@begin core/text-transform167 #@desc Text transform on cells in column Violations 19 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_19_1
+#@out Violations_19_1
+#@end core/text-transform167
+#@begin core/text-transform168 #@desc Text transform on cells in column Violations 19 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_19_1
+#@out Violations_19_2
+#@end core/text-transform168
+#@begin core/text-transform169 #@desc Text transform on cells in column Violations 19 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_19_2
+#@out Violations_19_3
+#@end core/text-transform169
+#@begin core/text-transform170 #@desc Text transform on cells in column Violations 18 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_18_1
+#@out Violations_18_1
+#@end core/text-transform170
+#@begin core/text-transform171 #@desc Text transform on cells in column Violations 18 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_18_1
+#@out Violations_18_2
+#@end core/text-transform171
+#@begin core/text-transform172 #@desc Text transform on cells in column Violations 18 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_18_2
+#@out Violations_18_3
+#@end core/text-transform172
+#@begin core/text-transform173 #@desc Text transform on cells in column Violations 17 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_17_1
+#@out Violations_17_1
+#@end core/text-transform173
+#@begin core/text-transform174 #@desc Text transform on cells in column Violations 17 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_17_1
+#@out Violations_17_2
+#@end core/text-transform174
+#@begin core/text-transform175 #@desc Text transform on cells in column Violations 17 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_17_2
+#@out Violations_17_3
+#@end core/text-transform175
+#@begin core/text-transform176 #@desc Text transform on cells in column Violations 16 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_16_1
+#@out Violations_16_1
+#@end core/text-transform176
+#@begin core/text-transform177 #@desc Text transform on cells in column Violations 16 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_16_1
+#@out Violations_16_2
+#@end core/text-transform177
+#@begin core/text-transform178 #@desc Text transform on cells in column Violations 16 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_16_2
+#@out Violations_16_3
+#@end core/text-transform178
+#@begin core/text-transform179 #@desc Text transform on cells in column Violations 15 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_15_1
+#@out Violations_15_1
+#@end core/text-transform179
+#@begin core/text-transform180 #@desc Text transform on cells in column Violations 15 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_15_1
+#@out Violations_15_2
+#@end core/text-transform180
+#@begin core/text-transform181 #@desc Text transform on cells in column Violations 15 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_15_2
+#@out Violations_15_3
+#@end core/text-transform181
+#@begin core/text-transform182 #@desc Text transform on cells in column Violations 13 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_13_1
+#@out Violations_13_1
+#@end core/text-transform182
+#@begin core/text-transform183 #@desc Text transform on cells in column Violations 13 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_13_1
+#@out Violations_13_2
+#@end core/text-transform183
+#@begin core/text-transform184 #@desc Text transform on cells in column Violations 13 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_13_2
+#@out Violations_13_3
+#@end core/text-transform184
+#@begin core/text-transform185 #@desc Text transform on cells in column Violations 14 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_14_1
+#@out Violations_14_1
+#@end core/text-transform185
+#@begin core/text-transform186 #@desc Text transform on cells in column Violations 14 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_14_1
+#@out Violations_14_2
+#@end core/text-transform186
+#@begin core/text-transform187 #@desc Text transform on cells in column Violations 14 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_14_2
+#@out Violations_14_3
+#@end core/text-transform187
+#@begin core/text-transform188 #@desc Text transform on cells in column Violations 12 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_12_1
+#@out Violations_12_1
+#@end core/text-transform188
+#@begin core/text-transform189 #@desc Text transform on cells in column Violations 12 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_12_1
+#@out Violations_12_2
+#@end core/text-transform189
+#@begin core/text-transform190 #@desc Text transform on cells in column Violations 12 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_12_2
+#@out Violations_12_3
+#@end core/text-transform190
+#@begin core/text-transform191 #@desc Text transform on cells in column Violations 11 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_11_1
+#@out Violations_11_1
+#@end core/text-transform191
+#@begin core/text-transform192 #@desc Text transform on cells in column Violations 11 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_11_1
+#@out Violations_11_2
+#@end core/text-transform192
+#@begin core/text-transform193 #@desc Text transform on cells in column Violations 11 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_11_2
+#@out Violations_11_3
+#@end core/text-transform193
+#@begin core/text-transform194 #@desc Text transform on cells in column Violations 10 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_10_1
+#@out Violations_10_1
+#@end core/text-transform194
+#@begin core/text-transform195 #@desc Text transform on cells in column Violations 10 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_10_1
+#@out Violations_10_2
+#@end core/text-transform195
+#@begin core/text-transform196 #@desc Text transform on cells in column Violations 10 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_10_2
+#@out Violations_10_3
+#@end core/text-transform196
+#@begin core/text-transform197 #@desc Text transform on cells in column Violations 9 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_9_1
+#@out Violations_9_1
+#@end core/text-transform197
+#@begin core/text-transform198 #@desc Text transform on cells in column Violations 9 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_9_1
+#@out Violations_9_2
+#@end core/text-transform198
+#@begin core/text-transform199 #@desc Text transform on cells in column Violations 9 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_9_2
+#@out Violations_9_3
+#@end core/text-transform199
+#@begin core/text-transform200 #@desc Text transform on cells in column Violations 8 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_8_1
+#@out Violations_8_1
+#@end core/text-transform200
+#@begin core/text-transform201 #@desc Text transform on cells in column Violations 8 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_8_1
+#@out Violations_8_2
+#@end core/text-transform201
+#@begin core/text-transform202 #@desc Text transform on cells in column Violations 8 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_8_2
+#@out Violations_8_3
+#@end core/text-transform202
+#@begin core/text-transform203 #@desc Text transform on cells in column Violations 7 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_7_1
+#@out Violations_7_1
+#@end core/text-transform203
+#@begin core/text-transform204 #@desc Text transform on cells in column Violations 7 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_7_1
+#@out Violations_7_2
+#@end core/text-transform204
+#@begin core/text-transform205 #@desc Text transform on cells in column Violations 7 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_7_2
+#@out Violations_7_3
+#@end core/text-transform205
+#@begin core/text-transform206 #@desc Text transform on cells in column Violations 6 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_6_1
+#@out Violations_6_1
+#@end core/text-transform206
+#@begin core/text-transform207 #@desc Text transform on cells in column Violations 6 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_6_1
+#@out Violations_6_2
+#@end core/text-transform207
+#@begin core/text-transform208 #@desc Text transform on cells in column Violations 6 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_6_2
+#@out Violations_6_3
+#@end core/text-transform208
+#@begin core/text-transform209 #@desc Text transform on cells in column Violations 5 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_5_1
+#@out Violations_5_1
+#@end core/text-transform209
+#@begin core/text-transform210 #@desc Text transform on cells in column Violations 5 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_5_1
+#@out Violations_5_2
+#@end core/text-transform210
+#@begin core/text-transform211 #@desc Text transform on cells in column Violations 5 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_5_2
+#@out Violations_5_3
+#@end core/text-transform211
+#@begin core/text-transform212 #@desc Text transform on cells in column Violations 4 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_4_1
+#@out Violations_4_1
+#@end core/text-transform212
+#@begin core/text-transform213 #@desc Text transform on cells in column Violations 4 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_4_1
+#@out Violations_4_2
+#@end core/text-transform213
+#@begin core/text-transform214 #@desc Text transform on cells in column Violations 4 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_4_2
+#@out Violations_4_3
+#@end core/text-transform214
+#@begin core/text-transform215 #@desc Text transform on cells in column Violations 3 using expression value.trim()
+#@param expression:value.trim()
+#@in Violations_3_1
+#@out Violations_3_1
+#@end core/text-transform215
+#@begin core/text-transform216 #@desc Text transform on cells in column Violations 3 using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Violations_3_1
+#@out Violations_3_2
+#@end core/text-transform216
+#@begin core/text-transform217 #@desc Text transform on cells in column Violations 3 using expression value.toUppercase()
+#@param expression:value.toUppercase()
+#@in Violations_3_2
+#@out Violations_3_3
+#@end core/text-transform217
+#@begin core/text-transform218 #@desc Text transform on cells in column Address - Clean using expression value.replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:value.replace(/[\\p{Zs}\\s]+/,'_')
+#@in Address_-_Clean
+#@out Address_-_Clean_1
+#@end core/text-transform218
+#@begin core/mass-edit219 #@desc Mass edit cells in column Address - Clean
+#@param expression:value
+#@in Address_-_Clean_1
+#@out Address_-_Clean_2
+#@end core/mass-edit219
+#@begin core/mass-edit220 #@desc Mass edit cells in column City - Clean
+#@param expression:value
+#@in City_-_Clean
+#@out City_-_Clean_1
+#@end core/mass-edit220
+#@begin core/text-transform221 #@desc Text transform on cells in column State using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,\" \")
+#@param expression:grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,"").replace("_","_").replace(/[\\p{Zs}\\s]+/,"_")
+#@in State
+#@out State_1
+#@end core/text-transform221
+#@begin core/text-transform222 #@desc Text transform on cells in column State using expression grel:if(isBlank(value),'IL','IL')
+#@param expression:grel:if(isBlank(value),'IL','IL')
+#@in State_1
+#@out State_2
+#@end core/text-transform222
+#@begin core/text-transform223 #@desc Text transform on cells in column Latitude using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,"").replace("_","_").replace(/[\\p{Zs}\\s]+/,'_')
+#@in Latitude
+#@out Latitude_1
+#@end core/text-transform223
+#@begin core/text-transform224 #@desc Text transform on cells in column Longitude using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,"").replace("_","_").replace(/[\\p{Zs}\\s]+/,'_')
+#@in Longitude
+#@out Longitude_1
+#@end core/text-transform224
+#@begin core/text-transform225 #@desc Text transform on cells in column Location using expression grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,\"\").replace(\" \",\" \").replace(/[\\p{Zs}\\s]+/,' ')
+#@param expression:grel:value.trim().toUppercase().replace(/[^\\u0020-\\u007F]/,"").replace("_","_").replace(/[\\p{Zs}\\s]+/,'_')
+#@in Location
+#@out Location_1
+#@end core/text-transform225
+#@begin core/text-transform226 #@desc Text transform on cells in column Latitude using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in Latitude_1
+#@out Latitude_2
+#@end core/text-transform226
+#@begin core/text-transform227 #@desc Text transform on cells in column Longitude using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in Longitude_1
+#@out Longitude_2
+#@end core/text-transform227
+#@begin core/text-transform228 #@desc Text transform on cells in column Location using expression grel:value.replace(/\\(|\\)/,'')
+#@param expression:grel:value.replace(/\\(|\\)/,'')
+#@in Location_1
+#@out Location_2
+#@end core/text-transform228
+#@begin CombineDataCleaningChanges
+#@in DBA_Name_-_Clean
+#@in remove-DBA_Name_-_Clean
+#@in License_-_Flag
+#@in remove-License_-_Flag
+#@in Inspection_Type_-_Clean_57
+#@in Inspection_Date_1
+#@in Inspection_Date_1
+#@in Inspection_Month
+#@in Inspection_Date_2
+#@in Inspection_Day
+#@in Inspection_Date_3
+#@in Inspection_Year
+#@in Facility_Type_2
+#@in Facility_Type_-_Clean_83
+#@in remove-Facility_Type_-_Clean
+#@in Violations_1
+#@in Violations_1_3
+#@in Violations_2_2
+#@in Violations_23_3
+#@in Violations_22_3
+#@in Violations_21_3
+#@in Violations_20_3
+#@in Violations_19_3
+#@in Violations_18_3
+#@in Violations_17_3
+#@in Violations_16_3
+#@in Violations_15_3
+#@in Violations_13_3
+#@in Violations_14_3
+#@in Violations_12_3
+#@in Violations_11_3
+#@in Violations_10_3
+#@in Violations_9_3
+#@in Violations_8_3
+#@in Violations_7_3
+#@in Violations_6_3
+#@in Violations_5_3
+#@in Violations_4_3
+#@in Violations_3_3
+#@in Address_-_Clean_2
+#@in City_-_Clean_1
+#@in State_2
+#@in Latitude_2
+#@in Longitude_2
+#@in Location_2
+#@out CleanData
+#@end CombineDataCleaningChanges
+#@end Parallel_OR

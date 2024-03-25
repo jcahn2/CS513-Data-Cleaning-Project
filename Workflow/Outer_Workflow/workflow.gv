@@ -1,0 +1,40 @@
+digraph Workflow {
+rankdir=LR
+fontname=Courier; fontsize=18; labelloc=t
+label=Data_Cleaning_Workflow
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; color=white
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+CleanWithOpenRefine [shape=record rankdir=LR label="{{<f0> CleanWithOpenRefine |<f1> Use OpenRefine to clean csv dataset}}"];
+SeparateTables [shape=record rankdir=LR label="{{<f0> SeparateTables |<f1> Use Python to separate data into 4 tables}}"];
+FunctionalDependencyChecks [shape=record rankdir=LR label="{{<f0> FunctionalDependencyChecks |<f1> Use Python to perform initial FD checks}}"];
+SQLiteQualityAssessment [shape=record rankdir=LR label="{{<f0> SQLiteQualityAssessment |<f1> Perform quality assessment in SQLite}}"];
+edge[fontname=Helvetica]
+CleanWithOpenRefine -> SeparateTables [label="Food-Inspections-07182023.csv"]
+CleanWithOpenRefine -> FunctionalDependencyChecks [label="Food-Inspections-07182023.csv"]
+SeparateTables -> SQLiteQualityAssessment [label="business.csv"]
+SeparateTables -> SQLiteQualityAssessment [label="inspections.csv"]
+SeparateTables -> SQLiteQualityAssessment [label="locations.csv"]
+SeparateTables -> SQLiteQualityAssessment [label="violations.csv"]
+}}
+subgraph cluster_input_ports_group_outer { label=""; color=white
+subgraph cluster_input_ports_group_inner { label=""; color=white
+node[shape=circle style=filled fillcolor="#FFFFFF" peripheries=1 fontname=Courier width=0.2]
+"Food_inspection.csv_input_port" [label=""]
+}}
+subgraph cluster_output_ports_group_outer { label=""; color=white
+subgraph cluster_output_ports_group_inner { label=""; color=white
+node[shape=circle style=filled fillcolor="#FFFFFF" peripheries=1 fontname=Courier width=0.2]
+"business_clean.csv_output_port" [label=""]
+"inspections_clean.csv_output_port" [label=""]
+"locations_clean.csv_output_port" [label=""]
+"violations_clean.csv_output_port" [label=""]
+}}
+edge[fontname=Helvetica]
+"Food_inspection.csv_input_port" -> CleanWithOpenRefine [label="Food_inspection.csv"]
+edge[fontname=Helvetica]
+SQLiteQualityAssessment -> "business_clean.csv_output_port" [label="business_clean.csv"]
+SQLiteQualityAssessment -> "inspections_clean.csv_output_port" [label="inspections_clean.csv"]
+SQLiteQualityAssessment -> "locations_clean.csv_output_port" [label="locations_clean.csv"]
+SQLiteQualityAssessment -> "violations_clean.csv_output_port" [label="violations_clean.csv"]
+}
