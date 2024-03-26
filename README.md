@@ -12,8 +12,8 @@ performed.
 
 ### Team Details
 Members:
-● Jeremy Ahn (jcahn2@illinois.edu)
-● Nithin Nathan (nnatha3@illinois.edu)
-● Ratul Saha (ratuls2@illinois.edu)
+- Jeremy Ahn (jcahn2@illinois.edu)
+- Nithin Nathan (nnatha3@illinois.edu)
+- Ratul Saha (ratuls2@illinois.edu)
 
-[Final Report] (CS513-Data Cleaning-Phase2 Report - Team120.pdf)
+[Final Report](CS513-Data Cleaning-Phase2 Report - Team120.pdf)
